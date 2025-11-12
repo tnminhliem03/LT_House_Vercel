@@ -33,7 +33,7 @@ function Package() {
         } finally {
             setIsLoading(false);
         }
-    }, [setIsLoading]);
+    }, [setIsLoading, currentUserInfo.id]);
 
     useEffect(() => {
         fetchItems(endpoints.packages, true);

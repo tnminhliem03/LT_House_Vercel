@@ -33,7 +33,7 @@ function Complaint() {
         } finally {
             setIsLoading(false);
         }
-    }, [setIsLoading]);
+    }, [setIsLoading, currentUserInfo.id]);
 
     useEffect(() => {
         fetchComplaints(endpoints.complaints, true);

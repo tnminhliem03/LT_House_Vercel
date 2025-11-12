@@ -54,7 +54,7 @@ function Payment() {
         } finally {
             setIsLoading(false);
         }
-    }, [setIsLoading]);
+    }, [setIsLoading, currentUserInfo.id]);
 
     useEffect(() => {
         fetchPayments(endpoints.payments, true);

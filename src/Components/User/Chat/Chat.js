@@ -256,7 +256,7 @@ function Chat () {
                                                                     <Grid item className="chat-message chat-message-owner-ml">
                                                                         {m.img ? (
                                                                             <Box className="chat-img-box">
-                                                                                <img className="bdr-06r chat-img" src={m.img} alt="User's photo in chat" />
+                                                                                <img className="bdr-06r chat-img" src={m.img} alt="Message" />
                                                                             </Box>
                                                                         ) : (
                                                                             <Box className="chat-message-owner-bg bdr-06r">
@@ -280,7 +280,7 @@ function Chat () {
                                                                     <Grid item className="chat-message">
                                                                         {m.img ? (
                                                                             <Box className="chat-img-box">
-                                                                                <img className="bdr-06r chat-img" src={m.img} alt="User's message image" />
+                                                                                <img className="bdr-06r chat-img" src={m.img} alt="Message" />
                                                                             </Box>
                                                                         ) : (
                                                                             <Box className="chat-message-partner bdr-06r">

@@ -45,7 +45,7 @@ function SecurityCard() {
         } finally {
             setIsLoading(false);
         }
-    }, [setIsLoading]);
+    }, [setIsLoading, currentUserInfo.id]);
 
     useEffect(() => {
         fetchSecurityCards(endpoints.security_cards, true);

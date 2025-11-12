@@ -62,7 +62,7 @@ function SurveyDetail() {
         } finally {
             setIsLoading(false);
         }
-    }, [setIsLoading]);
+    }, [setIsLoading, survey.id]);
     
     useEffect(() => {
         if (currentUserInfo) {
