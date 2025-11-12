@@ -26,7 +26,6 @@ function Chat () {
     const [openEmoji, setOpenEmoji] = useState(false);
     const [messages, setMessages] = useState([]);
     const [text, setText] = useState("");
-    const [messImg, setMessImg] = useState(null);
     const [chats, setChats] = useState([]);
     
     const endRef = useRef(null);
@@ -103,8 +102,6 @@ function Chat () {
         const file = e.target.files[0];
         if (!file) return;
 
-        setMessImg(file);
-
         const storageRef = ref(storage, `images/${uuid()}`);
 
         const uploadTask = uploadBytesResumable(storageRef, file);
@@ -142,8 +139,6 @@ function Chat () {
                     },
                     [data.chatId + ".date"]: serverTimestamp()
                 });
-
-                setMessImg(null);
             }
         );
     };
