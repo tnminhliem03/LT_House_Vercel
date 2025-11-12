@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Typewriter from 'typewriter-effect';
 import CountUp from 'react-countup';
 import { useEffect } from 'react';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, CardActions, CardContent, CardMedia, Container, Grid, TextField, Typography } from '@mui/material';
 import FamilyHouseIcon from '../../../Assets/Images/family-house_15179655.png';
 import VillaHouseIcon from '../../../Assets/Images/modern-house.png';
@@ -67,7 +67,7 @@ function Home() {
         setExpanded(isExpanded ? panelId : false);
     };
 
-    const fetchRooms = async (url, reset = false) => {
+    const fetchRooms = useCallback(async (url, reset = false) => {
         setIsLoading(true);
         
         try {
@@ -85,7 +85,7 @@ function Home() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, []);
 
     useEffect(() => {
         fetchRooms(endpoints.rooms, true);
