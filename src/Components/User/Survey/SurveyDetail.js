@@ -1,6 +1,6 @@
 import { Model, Survey } from 'survey-react-ui';
 import { useLocation, useNavigate } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Box, Container, Snackbar, Typography } from '@mui/material';
 import { useProfileContext } from '../../../Context/ProfileContext';
 import { useLayoutContext } from '../../../Context/LayoutContext';
@@ -21,7 +21,7 @@ function SurveyDetail() {
     const accessToken = localStorage.getItem('accessToken');
     const navigate = useNavigate();
 
-    const fetchAllData = async (questionsUrl, choicesUrl) => {
+    const fetchAllData = useCallback(async (questionsUrl, choicesUrl) => {
         setIsLoading(true);
         try {
             let allQuestions = [];
@@ -62,13 +62,13 @@ function SurveyDetail() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [setIsLoading]);
     
     useEffect(() => {
         if (currentUserInfo) {
             fetchAllData(endpoints.s_questions, endpoints.s_choices);
         }
-    }, [currentUserInfo]);
+    }, [currentUserInfo, fetchAllData]);
     
     const surveyJson = {
         elements: questions.map((q) => {

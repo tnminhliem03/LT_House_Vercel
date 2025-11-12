@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Box, Button, Card, CardContent, Container, Grid, MenuItem, Snackbar, TextField, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -28,7 +28,7 @@ function SecurityCard() {
 
     const accessToken = localStorage.getItem('accessToken');
 
-    const fetchSecurityCards = async (url, reset = false) => {
+    const fetchSecurityCards = useCallback(async (url, reset = false) => {
         setIsLoading(true);
     
         try {
@@ -45,17 +45,17 @@ function SecurityCard() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [setIsLoading]);
 
     useEffect(() => {
         fetchSecurityCards(endpoints.security_cards, true);
-    }, [currentUserInfo]);
+    }, [currentUserInfo, fetchSecurityCards]);
 
     useEffect(() => {
         if (nextPage) {
             fetchSecurityCards(nextPage);
         }
-    }, [nextPage]);
+    }, [nextPage, fetchSecurityCards]);
 
     const handleCreateSc = async (e) => {
         e.preventDefault();

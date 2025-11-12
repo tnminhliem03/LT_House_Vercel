@@ -1,16 +1,12 @@
-import { auth, db, messaging } from '../Config/Firebase';
-import { doc, setDoc, updateDoc } from 'firebase/firestore';
+import { auth, db } from '../Config/Firebase';
+import { doc, setDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import Api, { endpoints } from '../Config/Api';
-import { getToken } from 'firebase/messaging';
 
 const pythonanywhere_client_id = "Sy5TkcP5z3iJ2SwCB7euPEedOcCs9iyRxqgPIDDO";
 const pythonanywhere_client_secret = "u8LQTP5asDd6258QMUzJpXAtD9Nrdl43HpxkrLlaQYPiMP4HUWr9qdNg9Jkb5g6eBIWS9zoMp7hmG2SXtVCD1YeVM07ZGPhLGYuFb3hN8R4sSU9dhkTuxX8a5UOPhE3J";
-const local_client_id = "4WQgo6OG13j1Ca5YAD7VzIRZrN0hvGtMx4Upbsy8";
-const local_client_secret = "oMdZge49c15Q5d6QquDQceKhqxrrVb61AJtOknPKh6RaSxl40atL5KnOePvj7yzXHxvmmAyULBS2vNJ3z5OcXVKxTmbcmfBsJ3pvtiwceXbQ8VVHHT2y4dZA7SMnzEjr";
-
 
 const AuthContext = createContext();
 

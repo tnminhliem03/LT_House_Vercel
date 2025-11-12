@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Box, Button, Card, CardContent, Container, Grid, Typography } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
@@ -21,7 +21,7 @@ function Survey() {
 
     const navigate = useNavigate();
 
-    const fetchSurveys = async (url, reset = false) => {
+    const fetchSurveys = useCallback(async (url, reset = false) => {
         setIsLoading(true);
         
         try {
@@ -38,17 +38,17 @@ function Survey() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [setIsLoading]);
 
     useEffect(() => {
         fetchSurveys(endpoints.surveys, true);
-    }, [currentUserInfo]);
+    }, [currentUserInfo, fetchSurveys]);
 
     useEffect(() => {
         if (nextPage) {
             fetchSurveys(nextPage);
         }
-    }, [nextPage]);
+    }, [nextPage, fetchSurveys]);
 
     const handleClick = async (survey) => {
         navigate(`/${currentUser.uid}/surveys/${survey.id}/detail`, { state: { survey } });

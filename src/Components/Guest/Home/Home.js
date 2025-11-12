@@ -67,6 +67,7 @@ function Home() {
         setExpanded(isExpanded ? panelId : false);
     };
 
+    // const fetchRooms = async (url, reset = false) => {
     const fetchRooms = useCallback(async (url, reset = false) => {
         setIsLoading(true);
         
@@ -85,17 +86,19 @@ function Home() {
         } finally {
             setIsLoading(false);
         }
-    }, []);
+    }, [setIsLoading]);
 
     useEffect(() => {
         fetchRooms(endpoints.rooms, true);
     }, [setIsLoading, fetchRooms]);
+    // }, [setIsLoading]);
 
     useEffect(() => {
         if (nextPage) {
             fetchRooms(nextPage);
         }
     }, [nextPage, fetchRooms]);
+    // }, [nextPage]);
 
     const settings = {
         infinite: true,

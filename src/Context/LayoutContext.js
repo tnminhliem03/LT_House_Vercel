@@ -113,12 +113,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         padding: theme.spacing(2, 1, 2, 2),
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
-        width: 'calc(100% - 1em - ${theme.spacing(4)})', 
+        width: `calc(100% - 1em - ${theme.spacing(4)})`, 
         overflow: 'hidden', 
         textOverflow: 'ellipsis', 
         whiteSpace: 'nowrap', 
         [theme.breakpoints.up('md')]: {
-            width: 'calc(100% - 1em - ${theme.spacing(4)})', 
+            width: `calc(100% - 1em - ${theme.spacing(4)})`, 
         },
     },
 }));

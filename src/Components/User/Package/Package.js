@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Container, Grid, Typography } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
@@ -10,12 +10,12 @@ import dayjs from 'dayjs';
 
 function Package() {
     const { currentUserInfo } = useProfileContext();
-    const { setIsLoading, Loading } = useLayoutContext();
+    const { setIsLoading } = useLayoutContext();
 
     const [nextPage, setNextPage] = useState(null);
     const [items, setItems] = useState([]);
 
-    const fetchItems = async (url, reset = false) => {
+    const fetchItems = useCallback(async (url, reset = false) => {
         setIsLoading(true);
         
         try {
@@ -33,17 +33,17 @@ function Package() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [setIsLoading]);
 
     useEffect(() => {
         fetchItems(endpoints.packages, true);
-    }, [currentUserInfo]);
+    }, [currentUserInfo, fetchItems]);
 
     useEffect(() => {
         if (nextPage) {
             fetchItems(nextPage);
         }
-    }, [nextPage]);
+    }, [nextPage, fetchItems]);
 
     return (
         <React.Fragment key="package">

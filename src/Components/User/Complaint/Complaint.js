@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Box, Button, Card, CardContent, Container, Grid, Snackbar, TextField, Typography } from '@mui/material';
 import Api, { endpoints } from '../../../Config/Api';
 import { useLayoutContext } from '../../../Context/LayoutContext';
@@ -16,7 +16,7 @@ function Complaint() {
     const [complaints, setComplaints] = useState([]);
     const accessToken = localStorage.getItem('accessToken');
 
-    const fetchComplaints = async (url, reset = false) => {
+    const fetchComplaints = useCallback(async (url, reset = false) => {
         setIsLoading(true);
     
         try {
@@ -33,17 +33,17 @@ function Complaint() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [setIsLoading]);
 
     useEffect(() => {
         fetchComplaints(endpoints.complaints, true);
-    }, [currentUserInfo]);
+    }, [currentUserInfo, fetchComplaints]);
 
     useEffect(() => {
         if (nextPage) {
             fetchComplaints(nextPage);
         }
-    }, [nextPage]);
+    }, [nextPage, fetchComplaints]);
 
     const handleSendComplaint = async (e) => {
         e.preventDefault();

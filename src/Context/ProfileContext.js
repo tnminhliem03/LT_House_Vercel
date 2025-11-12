@@ -34,7 +34,7 @@ export const ProfileProvider = ({ children }) => {
         };
 
         fetchProfile();
-    }, [currentUser, accessToken]);
+    }, [currentUser, accessToken, fetchCurrentUserInfo, setIsLoading]);
 
     const handleUpdateProfile = async (formData) => {
         setIsLoading(true);

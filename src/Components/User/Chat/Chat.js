@@ -15,10 +15,7 @@ import EmojiPicker from 'emoji-picker-react';
 import NewChatModal from './NewChat';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 as uuid } from 'uuid';
-import addNotification from 'react-push-notification';
-import { useNavigate } from 'react-router-dom';
-
-
+// import { useNavigate } from 'react-router-dom';
 
 function Chat () {
     const { currentUser } = useAuthContext();
@@ -33,7 +30,7 @@ function Chat () {
     const [chats, setChats] = useState([]);
     
     const endRef = useRef(null);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const handleEmoji = (e) => {
         setText((prev) => prev + e.emoji);
@@ -259,7 +256,7 @@ function Chat () {
                                                                     <Grid item className="chat-message chat-message-owner-ml">
                                                                         {m.img ? (
                                                                             <Box className="chat-img-box">
-                                                                                <img className="bdr-06r chat-img" src={m.img} alt="Message Image" />
+                                                                                <img className="bdr-06r chat-img" src={m.img} alt="User's photo in chat" />
                                                                             </Box>
                                                                         ) : (
                                                                             <Box className="chat-message-owner-bg bdr-06r">
@@ -283,7 +280,7 @@ function Chat () {
                                                                     <Grid item className="chat-message">
                                                                         {m.img ? (
                                                                             <Box className="chat-img-box">
-                                                                                <img className="bdr-06r chat-img" src={m.img} alt="Message Image" />
+                                                                                <img className="bdr-06r chat-img" src={m.img} alt="User's message image" />
                                                                             </Box>
                                                                         ) : (
                                                                             <Box className="chat-message-partner bdr-06r">

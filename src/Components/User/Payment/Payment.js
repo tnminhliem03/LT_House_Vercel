@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Box, Button, Card, CardContent, Container, createTheme, Grid, Menu, MenuItem, Typography, useMediaQuery, ThemeProvider } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
@@ -36,7 +36,7 @@ function Payment() {
         setSelectedPayment(null);
     }
 
-    const fetchPayments = async (url, reset = false) => {
+    const fetchPayments = useCallback(async (url, reset = false) => {
         setIsLoading(true);
         
         try {
@@ -54,17 +54,17 @@ function Payment() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [setIsLoading]);
 
     useEffect(() => {
         fetchPayments(endpoints.payments, true);
-    }, [currentUserInfo]);
+    }, [currentUserInfo, fetchPayments]);
 
     useEffect(() => {
         if (nextPage) {
             fetchPayments(nextPage);
         }
-    }, [nextPage]);
+    }, [nextPage, fetchPayments]);
 
     const handleOpenModal = (payment) => {
         setSelectedPayment(payment);
