@@ -89,13 +89,13 @@ function Home() {
 
     useEffect(() => {
         fetchRooms(endpoints.rooms, true);
-    }, [setIsLoading]);
+    }, [setIsLoading, fetchRooms]);
 
     useEffect(() => {
         if (nextPage) {
             fetchRooms(nextPage);
         }
-    }, [nextPage]);
+    }, [nextPage, fetchRooms]);
 
     const settings = {
         infinite: true,
